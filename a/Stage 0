@@ -1,0 +1,12 @@
+print("Proline team")
+personal_information = { 
+    "Name": "Chika Onyedikachukwu",
+    "Slack username": "Onyedikachukwu",
+    "Email": "chikadika18@gmail.com",
+    "Hobby": "Reading",
+    "Country": "Nigeria",
+    "Discipline": "Medical Laboratory Scientist",
+    "Programming Language": "Python"
+}
+print(personal_information)
+
