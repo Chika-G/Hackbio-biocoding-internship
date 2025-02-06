@@ -1,4 +1,6 @@
-print("Proline team") #this codes for the Proline team
+#Printing
+print("Proline team") 
+#Creating a dictionary
 personal_information = { 
     "Name": "Chika Onyedikachukwu", #Gender: Female
     "Slack username": "Onyedikachukwu",
