@@ -27,5 +27,6 @@ The strings are enclosed with double quotes.
 In line 10, the dictionary is closed with the closing curly bracket.
 5. Printing the dictionary:
 The last line uses the print() function to output the  personal_information dictionary.
+
 Comments are added to this code and they begin with the # symbol.
 
