@@ -21,7 +21,7 @@ The keys are separated from the values by colons. Each key-value pair are separa
 
 "Programming Language": "Python": The key is "Programming Language" and the value is "Python".
 
-The strings are enclosed with double quotes.
+The strings are enclosed with double quotes. Each team members' information are separated by comma.
 
 4. Closing the dictionary:
 The dictionary is closed with the closing curly bracket.
