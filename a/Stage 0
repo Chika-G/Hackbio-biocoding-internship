@@ -1,7 +1,7 @@
 #This information is organised in alphabetical order using the dictionary data structure
 print("Proline Team1")
 Team_Proline1_Info = {
-    "Member_1": {
+   "Member_1": {
         "Name": "Adeola Akintola",
         "Slack_Username": "adeolaa",
         "Email": " akintolaadeola09@gmail.com",
@@ -10,7 +10,16 @@ Team_Proline1_Info = {
         "Discipline": "Public Health",
         "Programming Language": "Python"
     },
-    "Member_2": {  
+    "Member_2": {
+       "Name": "Alamin Omitogun",
+       "Slack username": "Alamin",
+       "Email": "mbamalujudith@gmail.com",
+       "Hobby": "Running, reading",
+       "Country": "Nigeria",
+       "Discipline": "Pharmacology, Cell biology",
+       "Programming Language": "Python"
+    },
+    "Member_3": {  
         "Name": "Chika Onyedikachukwu",  
         "Slack Username": "Onyedikachukwu",
         "Email": " chikadika18@gmail.com",
@@ -19,7 +28,7 @@ Team_Proline1_Info = {
         "Discipline" : "Medical Laboratory Science",
         "Programming Language": "Python"
     },
-    "Member_3": {
+    "Member_4": {
         "Name": "Judith Mbamalu",
         "Slack Username": "JudithM",
         "Email": " mbamalujudith@gmail.com",
@@ -28,7 +37,7 @@ Team_Proline1_Info = {
         "Discipline": "Plant Science",
         "Programming Language": "Python"
     },
-    "Member_4": {
+    "Member_5": {
         "Name": "Princewill_Ukot Eseoghene Cynthia",
         "Slack Username": "Ese",
         "Email": "princewillukot@gmail.com",
@@ -39,4 +48,4 @@ Team_Proline1_Info = {
     }
 }
 print(Team_Proline1_Info) 
-#
+#https://github.com/Chika-G/Hackbio-biocoding-internship/blob/main/README.md#hackbio-biocoding-internship
