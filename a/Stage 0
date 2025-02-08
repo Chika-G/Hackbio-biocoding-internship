@@ -1,5 +1,5 @@
 #This information is organised in alphabetical order using the dictionary data structure
-print("Proline Team 1")
+print("Proline team 1")
 Team_Proline1_Info = {
    "Member_1": {
         "Name": "Adeola Akintola",
