@@ -13,8 +13,8 @@ Team_Proline1_Info = {
         "Discipline": "Public Health",
         "Programming Language": "Python"
     },
-    "Member_2": {
-        "Name": "Chika Onyedikachukwu",
+    "Member_2": {  
+        "Name": "Chika Onyedikachukwu",  
         "Slack Username": "Onyedikachukwu",
         "Email": " chikadika18@gmail.com",
         "Hobby": "Reading",
