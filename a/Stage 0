@@ -1,7 +1,4 @@
-#Stage Zero Project.
-#Using dictionary data structure to organize proline members information
-#The information will be nested as it contains different groupings/classifications
-#The organisation is in alphabetical order
+#This information is organised in alphabetical order using the dictionary data structure
 print("Proline Team1")
 Team_Proline1_Info = {
     "Member_1": {
@@ -42,4 +39,4 @@ Team_Proline1_Info = {
     }
 }
 print(Team_Proline1_Info) 
-#https://github.com/Chika-G/Hackbio-biocoding-internship/blob/main/README.md#hackbio-biocoding-internship
+#
