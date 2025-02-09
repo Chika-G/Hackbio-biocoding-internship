@@ -41,7 +41,7 @@ Team_Proline1_Info = {
     "Member_5": {
         "Name": "Princewill_Ukot Eseoghene Cynthia",
         "Slack Username": "Ese",
-        "Email": "princewillukot@gmail.com",
+        "Email": "ese.princewillukot@gmail.com",
         "Hobby": "Reading and Coding",
         "Country": "Nigeria",
         "Discipline": "Plant Science and Biotechnology",
