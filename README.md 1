@@ -1,5 +1,5 @@
 STAGE 1: TASK 1
-Here, Python functions translate a DNA sequence to a protein sequence by using a codon table. The function processes the DNA sequence, converts it to RNA,then divides it into codons, and maps those codons to corresponding amino acids.
+Here, Python functions translate a DNA sequence to a protein sequence by using a codon table. The function processes the DNA sequence, divides it into codons, and maps those codons to corresponding amino acids.
 TASK 2
 Here,Python functions and logistic growth equation is used to simulate and generate a logistic population growth curve
 TASK 2b
