@@ -1,95 +1,78 @@
-codon_to_aa = {
-    'AUG': 'M',  'UUU': 'F', 'UUC': 'F', 'UUA': 'L', 'UUG': 'L', 
-    'CUU': 'L',  'CUC': 'L', 'CUA': 'L', 'CUG': 'L', 'AUU': 'I', 
-    'AUC': 'I',  'AUA': 'I', 'ACU': 'T', 'ACC': 'T', 'ACA': 'T', 
-    'ACG': 'T',  'GUU': 'V', 'GUC': 'V', 'GUA': 'V', 'GUG': 'V', 
-    'GCU': 'A',  'GCC': 'A', 'GCA': 'A', 'GCG': 'A', 'UUU': 'F', 
-    'UUU': 'F', 'CCU': 'P', 'CCC': 'P', 'CCG': 'P', 'CCU': 'P', 
-    'AGU': 'S', 'AGS': 'S', 'GGA': 'G', 'GGC': 'G', 'GGG': 'G'
-}
-def dna_to_rna(dna_sequence):
-    """Convert DNA sequence to RNA (replace T with U)."""
-    return dna_sequence.replace('T', 'U')
+def translate_dna_to_protein(dna_sequence):
+    # Codon to amino acid mapping
+    codon_table = {
+        'ATA': 'I', 'ATC': 'I', 'ATT': 'I', 'ATG': 'M', 'ACA': 'T', 'ACC': 'T', 'ACG': 'T', 'ACT': 'T',
+        'AAC': 'N', 'AAT': 'N', 'AAA': 'K', 'AAG': 'K', 'AGC': 'S', 'AGT': 'S', 'AGA': 'R', 'AGG': 'R',
+        'CTA': 'L', 'CTC': 'L', 'CTG': 'L', 'CTT': 'L', 'CCA': 'P', 'CCC': 'P', 'CCG': 'P', 'CCT': 'P',
+        'CAC': 'H', 'CAT': 'H', 'CAA': 'Q', 'CAG': 'Q', 'CGA': 'R', 'CGC': 'R', 'CGG': 'R', 'CGT': 'R',
+        'GTA': 'V', 'GTC': 'V', 'GTG': 'V', 'GTT': 'V', 'GCA': 'A', 'GCC': 'A', 'GCG': 'A', 'GCT': 'A',
+        'GAC': 'D', 'GAT': 'D', 'GAA': 'E', 'GAG': 'E', 'GGA': 'G', 'GGC': 'G', 'GGG': 'G', 'GGT': 'G',
+        'TCA': 'S', 'TCC': 'S', 'TCG': 'S', 'TCT': 'S', 'TTC': 'F', 'TTT': 'F', 'TTA': 'L', 'TTG': 'L',
+        'TAC': 'Y', 'TAT': 'Y', 'TAA': '*', 'TAG': '*', 'TGC': 'C', 'TGT': 'C', 'TGA': '*', 'TGG': 'W'
+    }
+    
+    # Ensure the DNA sequence length is a multiple of 3
+    dna_sequence = dna_sequence.upper()
+    protein = []
+    
+    # Iterate over the DNA sequence in steps of 3 (codons)
+    for i in range(0, len(dna_sequence), 3):
+        codon = dna_sequence[i:i+3]
+        if len(codon) == 3:  # Only process full codons
+            amino_acid = codon_table.get(codon, '')
+            if amino_acid == '*':  # Stop codon
+                break
+            protein.append(amino_acid)
+    
+    return ''.join(protein)
 
-def translate_rna_to_protein(rna_sequence):
-    """Translate RNA sequence into a protein sequence."""
-    protein = ""
-    
-    # Split RNA into codons (3 nucleotides per codon)
-    for i in range(0, len(rna_sequence), 3):
-        codon = rna_sequence[i:i+3]
-      
-        # Ensure we have a valid codon of length 3
-        if len(codon) == 3:
-            # Check if codon is in codon_to_aa dictionary
-            if codon in codon_to_aa:
-                protein += codon_to_aa[codon]
-            else:
-                protein += '?'  # Or use 'X' for an unknown codon
-        else:
-            # Handle incomplete codons (less than 3 nucleotides)
-            protein += '?'  # Or use 'X' for incomplete codons
-    
-    return protein
 #Write a function that simulates and generates a logistic population growth curve
 import numpy as np
 import matplotlib.pyplot as plt
-import random
 
-def logistic_growth(t, K, P0, r, lag_random_factor, exp_random_factor):
-    """
-    Simulate logistic population growth with randomized lag and exponential phases.
+def logistic_growth(t, P0, K, r, lag_duration_max, exp_duration_max):
+    # Randomly vary the lag and exponential durations
+    lag_duration = np.random.uniform(0, lag_duration_max)
+    exp_duration = np.random.uniform(0, exp_duration_max)
     
-    Parameters:
-    t : numpy array of time points
-    K : carrying capacity (max population size)
-    P0 : initial population size
-    r : growth rate
-    lag_random_factor : random factor to adjust the lag phase duration
-    exp_random_factor : random factor to adjust the exponential phase duration
-    
-    Returns:
-    Population size at each time point.
-    """
-    # Randomize the lag and exponential phases
-    lag_phase_duration = random.uniform(lag_random_factor[0], lag_random_factor[1])
-    exp_phase_duration = random.uniform(exp_random_factor[0], exp_random_factor[1])
-    
-    population = np.zeros_like(t)
-    
-    for i, time in enumerate(t):
-        # If within lag phase, use an almost constant population
-        if time < lag_phase_duration:
-            population[i] = P0
-        # If within exponential phase, calculate using logistic growth
-        elif time < lag_phase_duration + exp_phase_duration:
-            population[i] = K / (1 + ((K - P0) / P0) * np.exp(-r * (time - lag_phase_duration)))
-        # After exponential phase, population starts leveling off
+    # Calculate the population for each time point using logistic growth equation
+    population = []
+    for time in t:
+        if time < lag_duration:
+            # During the lag phase, the population increases slowly
+            population.append(P0)  # Start at initial population
+        elif time < lag_duration + exp_duration:
+            # During the exponential phase, population grows rapidly
+            P_exp = P0 * np.exp(r * (time - lag_duration))  # Exponential growth
+            population.append(min(P_exp, K))  # Cap the population at K (carrying capacity)
         else:
-            population[i] = K
-
+            # After the exponential phase, the population levels off
+            population.append(K)  # Population approaches the carrying capacity
+        
     return population
 
-# Parameters
-K = 1000      # Carrying capacity
-P0 = 10       # Initial population
-r = 0.1       # Growth rate
-t = np.linspace(0, 50, 500)  # Time array
+def generate_population_curve(P0=10, K=1000, r=0.1, t_max=100, lag_duration_max=20, exp_duration_max=50):
+    # Time points from 0 to t_max (in arbitrary time units)
+    t = np.linspace(0, t_max, t_max * 10)
+    
+    # Simulate the logistic growth
+    population = logistic_growth(t, P0, K, r, lag_duration_max, exp_duration_max)
+    
+    # Plot the growth curve
+    plt.figure(figsize=(10, 6))
+    plt.plot(t, population, label='Population Size vs Time')
+    plt.title('Logistic Population Growth Curve')
+    plt.xlabel('Time')
+    plt.ylabel('Population Size')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+    
+    return population
 
-# Randomization ranges for the lag and exponential phases
-lag_random_factor = (5, 10)    # Randomize lag phase duration between 5 and 10 time units
-exp_random_factor = (10, 20)   # Randomize exponential growth phase between 10 and 20 time units
+# Example usage:
+generate_population_curve(P0=10, K=1000, r=0.1, t_max=100, lag_duration_max=20, exp_duration_max=50)
 
-# Get the logistic growth curve
-population = logistic_growth(t, K, P0, r, lag_random_factor, exp_random_factor)
-
-# Plotting the results
-plt.plot(t, population, label="Logistic Growth")
-plt.xlabel('Time')
-plt.ylabel('Population Size')
-plt.title('Logistic Population Growth with Randomized Phases')
-plt.legend()
-plt.grid(True)
 #generate a dataframe with 100 different growth curves
 def generate_growth_curves(num_curves, t, K, P0, r, lag_random_factor, exp_random_factor):
     data = {}
@@ -121,6 +104,7 @@ df_growth_curves = generate_growth_curves(num_curves, t, K, P0, r, lag_random_fa
 print(df_growth_curves.head())
 
 plt.show()
+
 #Write a function for determining the time to reach 80% of the maximum growth;
 def time_to_reach_80_percent(K, P_0, r):
     """
@@ -150,6 +134,7 @@ r = 0.1   # growth rate
 
 time = time_to_reach_80_percent(K, P_0, r)
 print(f"Time to reach 80% of carrying capacity: {time:.2f} units of time")
+
 #write a function for calculating the hamming distance between your Slack username and twitter/X handle
 def hamming_distance(str1, str2):
     # Pad the shorter string with spaces to make both strings the same length
