@@ -14,7 +14,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import xgboost as xgb
 
 # 🔹 Step 1: Load the dataset
-url = "YOUR_GITHUB_RAW_LINK.csv"  # Replace with actual GitHub raw CSV link
+url = "https://raw.githubusercontent.com/HackBio-Internship/2025_project_collection/refs/heads/main/Python/Dataset/drug_class_struct.txt"  # Replace with actual GitHub raw CSV link
 df = pd.read_csv(url)
 
 # Display dataset info
